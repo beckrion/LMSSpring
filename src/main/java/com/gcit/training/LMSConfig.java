@@ -6,10 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.gcit.training.lms.dao.AuthorDAO;
+import com.gcit.training.lms.dao.BookDAO;
 import com.gcit.training.lms.dao.PublisherDAO;
 import com.gcit.training.lms.service.AdministrativeService;
+
+@EnableTransactionManagement
 
 @Configuration
 public class LMSConfig {
@@ -82,11 +86,17 @@ public class LMSConfig {
 //		
 //	}
 	@Bean
-	public PublisherDAO bDAO(){
-		PublisherDAO bdao = new PublisherDAO();
+	public PublisherDAO pDAO(){
+		PublisherDAO pdao = new PublisherDAO();
+		
+		return pdao;
+		
+	}
+	@Bean
+	public BookDAO bDAO(){
+		BookDAO bdao = new BookDAO();
 		
 		return bdao;
-		
 	}
 	
 	

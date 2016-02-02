@@ -17,7 +17,7 @@ public class AuthorDAO extends AbstractDAO implements ResultSetExtractor<List<Au
 	JdbcTemplate template;
 	
 	@Autowired
-	PublisherDAO bDAO;
+	PublisherDAO pDAO;
 
 	public void create(Author a) throws SQLException {
 		template.update("insert into tbl_author (authorName) values (?)",
