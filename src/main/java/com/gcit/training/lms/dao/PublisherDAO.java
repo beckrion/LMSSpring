@@ -20,7 +20,7 @@ public class PublisherDAO implements ResultSetExtractor<List<Publisher>>  {
 
 
 	public void create(Publisher p) throws SQLException {
-		template.update("insert into tbl_publisher (publisherName, publisherAddress) values (?)",
+		template.update("insert into tbl_publisher (publisherName, publisherAddress) values (?,?)",
 				new Object[] { p.getPublisherName(), p.getPublisherAddress() });
 	}
 

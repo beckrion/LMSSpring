@@ -9,7 +9,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.gcit.training.lms.dao.AuthorDAO;
+import com.gcit.training.lms.dao.BookCopiesDAO;
 import com.gcit.training.lms.dao.BookDAO;
+import com.gcit.training.lms.dao.BookLoansDAO;
+import com.gcit.training.lms.dao.BorrowerDAO;
+import com.gcit.training.lms.dao.GenreDAO;
+import com.gcit.training.lms.dao.LibraryBranchDAO;
 import com.gcit.training.lms.dao.PublisherDAO;
 import com.gcit.training.lms.service.AdministrativeService;
 
@@ -98,6 +103,34 @@ public class LMSConfig {
 		
 		return bdao;
 	}
+	@Bean
+	public BorrowerDAO boDAO(){
+		BorrowerDAO boDAO = new BorrowerDAO();
+		return boDAO;		
+	}
+	@Bean
+	public LibraryBranchDAO lbDAO(){
+		LibraryBranchDAO lbDAO = new LibraryBranchDAO();
+		return lbDAO;
+	}
+	@Bean
+	public GenreDAO geDAO(){
+		GenreDAO geDAO = new GenreDAO();
+		return geDAO;
+	}
+	@Bean
+	public BookCopiesDAO bcDAO(){
+		BookCopiesDAO bcDAO = new BookCopiesDAO();
+		return bcDAO;
+	}
+	@Bean
+	public BookLoansDAO blDAO(){
+		BookLoansDAO blDAO = new BookLoansDAO();
+		return blDAO;
+		
+	}
+	
+	
 	
 	
 

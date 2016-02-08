@@ -2,7 +2,10 @@ package com.gcit.training.lms.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,11 +26,20 @@ public class AdministrativeService {
 	}
 	
 	public List<Author> getAllAuthors(int pageNo, int pageSize, String searchString) throws SQLException{
-			if(StringUtils.hasLength(searchString)){
-				return adao.readAll(pageNo, pageSize);
+		try{
+			//AuthorDAO badao = new AuthorDAO(connection);
+			if(StringUtils.isEmpty(searchString)){
+				//System.out.println((adao.readAll(1, 1)).size());
+				List<Author> a = adao.readAll(1, 1);
+				System.out.println("size :" + a.size());
+				return a;
 			}else{
 				return adao.readByName(searchString, pageNo);
 			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public void deleteAuthor(Author author) throws SQLException {

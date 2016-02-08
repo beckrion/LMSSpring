@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 //@Entity
 //@Table(name = "tbl_author")
-@XmlRootElement(name="root")
+//@XmlRootElement(name="root")
 
 //tbl_author table
 public class Author {

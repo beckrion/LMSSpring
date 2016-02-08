@@ -9,7 +9,15 @@ public class Book {
 	private String title;
 	private Publisher publisher;
 	private List<Author> authors;
+	private List<Genre> genre;
 	
+	
+	public List<Genre> getGenre() {
+		return genre;
+	}
+	public void setGenre(List<Genre> genre) {
+		this.genre = genre;
+	}
 	public int getBookId() {
 		return bookId;
 	}
