@@ -536,6 +536,74 @@ public class HomeController {
 	}
 		
 	}
+	@RequestMapping(value = "/viewgenre", method = {RequestMethod.GET,RequestMethod.POST})
+	public String viewgenre(Locale locale, Model model)
+	{
+		try {
+			model.addAttribute("genre",geDAO.readAll());
+			return "viewgenre";
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "errorPage";
+		}
+	}
+	@RequestMapping(value = "/deleteGenre", method = {RequestMethod.GET,RequestMethod.POST})
+	public String deleteGenre(HttpServletRequest request,Locale locale, Model model) {
+		try {
+			int genId = Integer.parseInt(request.getParameter("genreId"));
+			Genre ge = new Genre();
+			ge.setGenreId(genId);
+			geDAO.delete(ge);
+			return viewgenre(locale,model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "ttt";
+		}
+	}
+	@RequestMapping(value = "/editGenre", method = {RequestMethod.GET,RequestMethod.POST})
+	public String editGenre(Locale locale, Model model){
+		return "editgenre";
+	}
+	@RequestMapping(value = "/updateGenre", method = {RequestMethod.GET,RequestMethod.POST})
+	public String updateGenre(Locale local,Model model,HttpServletRequest request)
+	{
+		int genId = Integer.parseInt(request.getParameter("genreId"));
+		String name = request.getParameter("genreName");
+		Genre ge = new Genre();
+		ge.setGenreId(genId);
+		ge.setGenreName(name);
+		try {
+			geDAO.update(ge);
+			return viewgenre(local,model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		}
+		
+	}
+	@RequestMapping(value = "/addgenre", method = {RequestMethod.GET,RequestMethod.POST})
+	public String addgenre(Locale locale, Model model){
+		return "addgenre";
+	}
+	@RequestMapping(value = "/addGenre", method = {RequestMethod.GET,RequestMethod.POST})
+	public String addGenre(HttpServletRequest request, HttpServletResponse response) 
+	{
+		try {
+		String genName = request.getParameter("genName");
+		Genre gen = new Genre();
+		gen.setGenreName(genName);
+		geDAO.create(gen);
+		return "addgenre";
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return "Author add failed!";
+	}
+		
+	}
 	
 
 }

@@ -16,6 +16,8 @@
             <li class="list-group-item"><a href="viewbook"> View Books</a></li>
             <li class="list-group-item"><a href="viewpublisher"> View Publisher</a></li>
             <li class="list-group-item"><a href="addpublisher"> Add Publisher</a></li>
+            <li class="list-group-item"><a href="viewgenre"> View Genre</a></li>
+            <li class="list-group-item"><a href="addgenre"> Add Genre</a></li>
           </ul>
         </div><!-- /.col-sm-4 -->
 </div>

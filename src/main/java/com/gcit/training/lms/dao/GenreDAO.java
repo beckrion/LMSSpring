@@ -24,7 +24,7 @@ public class GenreDAO extends AbstractDAO implements ResultSetExtractor<List<Gen
 	}
 	public void update (Genre a) throws SQLException
 	{
-		template.update("update tbl_genre set genre_name = ? where genre_id = ?",new Object[]{a.getGenreId()});
+		template.update("update tbl_genre set genre_name = ? where genre_id = ?",new Object[]{a.getGenreName(),a.getGenreId()});
 	}
 	public void delete(Genre a) throws SQLException {
 		template.update("delete from tbl_genre where genre_id = ?",new Object[]{a.getGenreId()});
