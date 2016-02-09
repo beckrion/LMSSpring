@@ -9,16 +9,18 @@
 <%@ page import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
-AdministrativeService adminService = new AdministrativeService();
+//AdministrativeService adminService = new AdministrativeService();
 	List<Author> authors = null;
 	if(request.getAttribute("authors")!=null){
 		authors = (List<Author>)request.getAttribute("authors");
 	}else{
-		authors = adminService.getAllAuthors(1, 1, "");
+		//authors = adminService.getAllAuthors(1, 1, "");
 	}
 	String searchString = "";
 	if(request.getParameter("searchString")!=null)
 		searchString = request.getParameter("searchString");
+	Integer NumOfPage = (Integer)request.getAttribute("pageNu");
+	
 %>
 <script>
 function searchAuthor(pageNo){
@@ -41,12 +43,12 @@ function searchAuthor(pageNo){
 	<h1>List of Authors in LMS Application</h1>
 	${result }
 </div>
-<form name="authorsForm" method="post">
+<form action=searchAuthor method="post">
 <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">Search</span>
   <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="searchString" id="searchString" value=<%=searchString%>>
 </div>
-<button type="submit" class="btn btn-sm btn-primary" onclick="searchAuthor(1)">Search!</button>
+<button type="submit" class="btn btn-sm btn-primary" >Search!</button>
 </form>
 <nav>
   <ul class="pagination">
@@ -55,11 +57,16 @@ function searchAuthor(pageNo){
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li><a href="javascript:searchAuthor(1)">1</a></li>
+    <%for(int i = 1;i<=NumOfPage;i++)
+    {
+    	out.print("<li><a href=\"viewAuthorPage?page="+i+"\">"+i+"</a></li>");
+    }
+    %>
+<!--     <li><a href="javascript:searchAuthor(1)">1</a></li>
     <li><a href="javascript:searchAuthor(2)">2</a></li>
     <li><a href="javascript:searchAuthor(3)">3</a></li>
     <li><a href="javascript:searchAuthor(4)">4</a></li>
-    <li><a href="javascript:searchAuthor(5)">5</a></li>
+    <li><a href="javascript:searchAuthor(5)">5</a></li> -->
     <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>

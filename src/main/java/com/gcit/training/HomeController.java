@@ -144,7 +144,52 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/viewAuthor", method = {RequestMethod.GET,RequestMethod.POST},produces="application/json")
 	public String viewauthors(Locale locale, Model model) throws SQLException{
-		model.addAttribute("authors",aDAO.readAll(1, 20));
+		model.addAttribute("authors",aDAO.readTen(1));
+		List<Author> allAuthor = aDAO.readAll(1,1);
+		Integer NuOfPage = allAuthor.size()/10;
+		if(allAuthor.size()%10>0)
+		{
+			NuOfPage++;
+		}
+		System.out.println(NuOfPage);
+		model.addAttribute("pageNu",NuOfPage);
+		
+		return "viewAuthor";
+		//produces="application/json"
+//		@PathVariable int PageNo,@PathVariable int PageSize
+
+	}
+	@RequestMapping(value = "/viewAuthorPage", method = {RequestMethod.GET,RequestMethod.POST},produces="application/json")
+	public String viewauthorspage(Locale locale, Model model,HttpServletRequest request) throws SQLException{
+		int page = Integer.parseInt(request.getParameter("page"));
+		model.addAttribute("authors",aDAO.readTen(page));
+		List<Author> allAuthor = aDAO.readAll(1,1);
+		Integer NuOfPage = allAuthor.size()/10;
+		if(allAuthor.size()%10>0)
+		{
+			NuOfPage++;
+		}
+		System.out.println(NuOfPage);
+		model.addAttribute("pageNu",NuOfPage);
+		
+		return "viewAuthor";
+		//produces="application/json"
+//		@PathVariable int PageNo,@PathVariable int PageSize
+
+	}
+	@RequestMapping(value = "/searchAuthor", method = {RequestMethod.GET,RequestMethod.POST})
+	public String searchAuthor(Locale locale, Model model,HttpServletRequest request) throws SQLException{
+		String search= request.getParameter("searchString");
+		System.out.println("++++");
+		List<Author> allAuthor = aDAO.readByName(search, 0);
+		Integer NuOfPage = allAuthor.size()/10;
+		if(allAuthor.size()%10>0)
+		{
+			NuOfPage++;
+		}
+		System.out.println(NuOfPage);
+		model.addAttribute("pageNu",NuOfPage);
+		model.addAttribute("authors",allAuthor);
 		return "viewAuthor";
 		//produces="application/json"
 //		@PathVariable int PageNo,@PathVariable int PageSize
@@ -603,6 +648,20 @@ public class HomeController {
 		return "Author add failed!";
 	}
 		
+	}
+	@RequestMapping(value = "/deleteBook", method = {RequestMethod.GET,RequestMethod.POST})
+	public String deleteBook(HttpServletRequest request,Locale locale, Model model) {
+		try {
+			int bookId = Integer.parseInt(request.getParameter("bookId"));
+			Book kb = new Book();
+			kb.setBookId(bookId);
+			bDAO.delete(kb);
+			return viewBook(locale,model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "ttt";
+		}
 	}
 	
 

@@ -51,6 +51,16 @@ public class AuthorDAO extends AbstractDAO implements ResultSetExtractor<List<Au
 		List<Author> authors = (List<Author>) template.query("select * from tbl_author", this);
 		return authors;
 	}
+	public List<Author> readTen(int pageNo) throws SQLException {
+		//setPageNo(pageNo);
+		int setNumber = 0;
+		if(pageNo ==1)
+			setNumber = 0;
+		else
+			setNumber = (pageNo-1)*10-1;
+		List<Author> authors = (List<Author>) template.query("select * from tbl_author LIMIT ?,?", new Object[] { setNumber,10 },this);
+		return authors;
+	}
 	
 	public Integer getCount() throws SQLException {
 		return template.queryForObject("select count(*) from tbl_author", Integer.class);

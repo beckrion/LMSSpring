@@ -64,8 +64,11 @@ public class BookDAO implements ResultSetExtractor<List<Book>> {
 						a.getBookId() });
 	}
 	public void delete(Book a) throws SQLException {
+		template.update("delete from tbl_book_authors where bookId = ?",new Object[] { a.getBookId() });
+		template.update("delete from tbl_book_genres where bookId = ?",new Object[] { a.getBookId() });
 		template.update("delete from tbl_book where bookId = ?",
 				new Object[] { a.getBookId() });
+
 	}
 	public void updateTitle(Book a) throws SQLException {
 		template.update("update tbl_book set title = ? where bookId = ?",
